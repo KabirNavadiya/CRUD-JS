@@ -10,17 +10,20 @@
 
     <h2>Product Management System</h2>
     
-    <form id="productForm">
+    <form id="productForm" >
+        <input type="text" id="productId" placeholder="Product Id" >
         <input type="text" id="productName" placeholder="Product Name" >
         <input type="text" id="price" placeholder="Price" >
         <input type="text" id="description" placeholder="Description" >
-        <input type="text" id="productImage" placeholder="Image Link">
-        <button class="Add-product" type="submit">Add Product</button>
+        <input type="file" id="productImage" accept="image/*">
+        <button class="Add-product" id="submitButton" type="submit" onclick="HandleSubmit()">Add Product</button>
+        <button class="edit-product" id="Update" type="submit" >Update</button>
     </form>
+
 
     <br>
     
-    <!-- <label>Filter by ID:</label>
+    <label>Filter by ID:</label>
     <input type="text" id="filterInput" placeholder="Enter Product ID">
     
     <label>Sort by:</label>
@@ -31,7 +34,7 @@
     </select>
     
     <button onclick="applyFilters()">Apply</button>
-     -->
+    
     <h3>Product List</h3>
     <table>
         <thead>

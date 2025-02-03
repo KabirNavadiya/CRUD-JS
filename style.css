@@ -40,3 +40,6 @@ button{
 .Add-product{
     width: 200px;
 }
+.edit-product{
+    display: none;
+}
