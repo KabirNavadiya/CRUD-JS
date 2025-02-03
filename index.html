@@ -23,18 +23,16 @@
 
     <br>
     
-    <label>Filter by ID:</label>
-    <input type="text" id="filterInput" placeholder="Enter Product ID">
-    
+    <label>search:</label>
+    <input type="text" id="filterInput" placeholder="Search product name" oninput="HandleSearch()">
     <label>Sort by:</label>
     <select id="sortSelect">
         <option value="id">Product ID</option>
         <option value="name">Product Name</option>
         <option value="price">Price</option>
     </select>
-    
     <button onclick="applyFilters()">Apply</button>
-    
+
     <h3>Product List</h3>
     <table>
         <thead>

@@ -2,7 +2,7 @@ const form = document.getElementById('productForm');
 document.addEventListener("DOMContentLoaded",loadProducts);
 
 function HandleSubmit(e){
-    
+
     e.preventDefault();
     const id = document.getElementById('productId').value;
     let name = document.getElementById('productName').value;
@@ -114,5 +114,29 @@ function loadProducts(){
             </td>
         `
     });
+}
+function HandleSearch(){
+    const input = document.getElementById('filterInput').value;
+    let table = document.getElementById("productTable")
+    let tr = table.getElementsByTagName('tr');
+
+    for (let i = 0; i < tr.length; i++) {
+        let td = tr[i].getElementsByTagName("td")[1];
+
+        if(td){
+            if(td.innerHTML.toLowerCase().indexOf(input.toLowerCase()) > -1){
+                tr[i].style.display = "";
+        
+            }else{
+                tr[i].style.display = "none";
+            }
+        }
+    }  
+}
+
+function applyFilters(){
+    const sortfilter = document.getElementById("sortSelect");
+    let table = document.getElementById("productTable")
+    let tr = table.getElementsByTagName('tr');
 }
 
