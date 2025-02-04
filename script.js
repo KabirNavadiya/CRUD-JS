@@ -22,7 +22,7 @@ form.addEventListener("submit",(e)=>{
         const reader = new FileReader();
         reader.onload = function () {
 
-            if(imgsize<200000){
+            if(imgsize<500000){
                 let imgURL = reader.result;
                 products = JSON.parse(localStorage.getItem("products")) || [];
                 let newProduct = { id : generateId(), name, price, description, img: imgURL };
@@ -39,7 +39,7 @@ form.addEventListener("submit",(e)=>{
                 }
             }
             else{
-                alert("file to large !");
+                alert("file to large max(500kb) !");
             }
             loadProducts();
         }
