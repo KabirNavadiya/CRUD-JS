@@ -29,15 +29,18 @@
 
 
     <br>
+    <form id="filter">
+        <label>search:</label>
+        <input type="text" id="filterInput" placeholder="Search product name" oninput="handleSearch()">
+        <label>Sort by:</label>
+        <select id="sortSelect">
+            <option value="id">Product ID</option>
+            <option value="name">Product Name</option>
+            <option value="price">Price</option>
+        </select>
+        <button class="apply-filter" id="sortItem" type="submit">Apply</button>
+    </form>
     
-    <label>search:</label>
-    <input type="text" id="filterInput" placeholder="Search product name" oninput="handleSearch()">
-    <label>Sort by:</label>
-    <select id="sortSelect">
-        <option value="id">Product ID</option>
-        <option value="name">Product Name</option>
-        <option value="price">Price</option>
-    </select>
     
 
     <h3>Product List</h3>

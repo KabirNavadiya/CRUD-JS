@@ -2,9 +2,13 @@ const form = document.getElementById('productForm');
 document.addEventListener("DOMContentLoaded", loadProducts);
 const editform = document.getElementById('editForm');
 editform.style.display = "none";
+const applyfilter = document.getElementById('filter');
+let products = JSON.parse(localStorage.getItem("products")) || [];
 
-
-let lastid =1;
+function generateId(){
+    let r = "#" + Math.random().toString(36).substring(2, 6);
+    return r;
+}
 
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
@@ -19,8 +23,8 @@ form.addEventListener("submit",(e)=>{
         const reader = new FileReader();
         reader.onload = function () {
             let imgURL = reader.result;
-            let products = JSON.parse(localStorage.getItem("products")) || [];
-            let newProduct = { id : lastid, name, price, description, img: imgURL };
+            products = JSON.parse(localStorage.getItem("products")) || [];
+            let newProduct = { id : generateId(), name, price, description, img: imgURL };
             let exists = products.some(prod => {
                 if (prod.name === newProduct.name) {
                     return prod.name;
@@ -28,7 +32,7 @@ form.addEventListener("submit",(e)=>{
             });
             if (!exists) {
                 products.push(newProduct);
-                lastid++;
+                // lastid++;
                 localStorage.setItem("products", JSON.stringify(products));
             } else {
                 alert("product with same name already exists")
@@ -73,7 +77,7 @@ function editProduct(indx) {
         const reader = new FileReader();
         reader.onload = function () {
             let imgURL = reader.result;
-            let products = JSON.parse(localStorage.getItem("products")) || [];
+            products = JSON.parse(localStorage.getItem("products")) || [];
             let newProduct = { id, name, price, description, img: imgURL };
             products[editIndx] = newProduct;
             localStorage.setItem("products", JSON.stringify(products));
@@ -87,19 +91,17 @@ function editProduct(indx) {
 
 
 function deleteProduct(indx) {
-    let products = JSON.parse(localStorage.getItem("products"));
+    products = JSON.parse(localStorage.getItem("products"));
     products.splice(indx, 1);
     localStorage.setItem("products", JSON.stringify(products));
     loadProducts()
 }
 
-
-function loadProducts() {
-
+applyfilter.addEventListener("submit",(e)=>{
+    e.preventDefault();
     const sortfilter = document.getElementById("sortSelect").value;
-    // console.log(sortfilter);
-    let products = JSON.parse(localStorage.getItem("products")) || [];
-
+    console.log(sortfilter);
+    
     switch (sortfilter) {
         case "id":
             products = products.sort((a,b)=> a.id - b.id);
@@ -113,6 +115,15 @@ function loadProducts() {
         default:
             break;
     }
+    displayProduct(products)
+    console.log(products);    
+})
+
+function loadProducts() {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    displayProduct(products);
+}
+function displayProduct(products){
     let table = document.getElementById('productTable');
     table.innerHTML = "";
     
@@ -131,6 +142,9 @@ function loadProducts() {
         `
     });
 }
+
+
+
 function handleSearch() {
     const input = document.getElementById('filterInput').value;
     let table = document.getElementById("productTable")
