@@ -22,27 +22,57 @@ input, button, select {
 }
 
 table {
-    width: 100%;
+    width: 80%;
     margin: auto;
     border-collapse: collapse;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 th, td {
     border: 1px solid black;
     padding: 8px;
-}
 
+}
+th{
+    background-color: #007bff;
+    color: white;
+}
 img {
     width: 100px;
     height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 button{
-    /* display: flex; */
-    /* flex-direction: row; */
     align-items: center;
     justify-content: center;
     width: 60px;
 }
 .Add-product{
     width: 200px;
+}
+.edit{
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: rgb(74, 206, 74);
+}
+.delete{
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: rgb(224, 43, 43);
+}
+.edit:hover{
+    background-color: rgb(46, 129, 46);
+    transform: scale(1.1,1.1);
+}
+.delete:hover{
+    background-color: rgb(179, 31, 31);
+    transform: scale(1.1,1.1);
 }

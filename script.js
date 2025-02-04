@@ -131,6 +131,8 @@ function appendbuttoncell(index){
     btn2.onclick = function(){deleteProduct(index)};
     btn1.innerText= "Edit";
     btn2.innerText = "Delete";
+    btn1.className = "edit";
+    btn2.className = "delete";
     cell.appendChild(btn1);
     cell.appendChild(btn2);
     return cell;
