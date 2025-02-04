@@ -16,23 +16,30 @@ form.addEventListener("submit",(e)=>{
     let price = document.getElementById('price').value;
     let description = document.getElementById('description').value;
     let img = document.getElementById('productImage').files[0];
+    let imgsize = document.getElementById('productImage').files[0].size;
 
     if (name && price && description && img) {
         const reader = new FileReader();
         reader.onload = function () {
-            let imgURL = reader.result;
-            products = JSON.parse(localStorage.getItem("products")) || [];
-            let newProduct = { id : generateId(), name, price, description, img: imgURL };
-            let exists = products.some(prod => {
-                if (prod.name === newProduct.name) {
-                    return prod.name;
+
+            if(imgsize<200000){
+                let imgURL = reader.result;
+                products = JSON.parse(localStorage.getItem("products")) || [];
+                let newProduct = { id : generateId(), name, price, description, img: imgURL };
+                let exists = products.some(prod => {
+                    if (prod.name === newProduct.name) {
+                        return prod.name;
+                    }
+                });
+                if (!exists) {
+                    products.push(newProduct);
+                    localStorage.setItem("products", JSON.stringify(products));
+                } else {
+                    alert("product with same name already exists")
                 }
-            });
-            if (!exists) {
-                products.push(newProduct);
-                localStorage.setItem("products", JSON.stringify(products));
-            } else {
-                alert("product with same name already exists")
+            }
+            else{
+                alert("file to large !");
             }
             loadProducts();
         }
@@ -99,11 +106,8 @@ applyfilter.addEventListener("submit",(e)=>{
         case "name":
             products = products.sort((a,b)=> a.name.localeCompare(b.name.toLowerCase()));
             break;
-        default:
-            break;
     }
-    displayProduct(products);
-    console.log(products);    
+    displayProduct(products);  
 })
 
 function createCell(value){
@@ -140,7 +144,7 @@ function displayProduct(products){
 
         row.appendChild(createCell(product.id));
         row.appendChild(createCell(product.name));
-        row.appendChild(createCell(product.price));
+        row.appendChild(createCell("$ "+product.price));
         row.appendChild(createCell(product.description));
         row.appendChild(appendImgCell(product.img));
         row.appendChild(appendbuttoncell(index))
@@ -148,21 +152,6 @@ function displayProduct(products){
         table.appendChild(row)
 
     });
-    
-    // products.forEach((product, indx) => {
-    //     let row = table.insertRow();
-    //     row.innerHTML = `
-    //         <td>${product.id}</td>
-    //         <td>${product.name}</td>
-    //         <td>$${product.price}</td>
-    //         <td>${product.description}</td>
-    //         <td><img src="${product.img}" alt="product-img"></td>
-    //         <td>
-    //             <button onClick="editProduct(${indx})">Edit</button>
-    //             <button onClick="deleteProduct(${indx})">Delete</button>
-    //         </td>
-    //     `
-    // });
 }
 function loadProducts() {
     let products = JSON.parse(localStorage.getItem("products")) || [];
