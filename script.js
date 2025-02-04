@@ -3,31 +3,35 @@ document.addEventListener("DOMContentLoaded", loadProducts);
 const editform = document.getElementById('editForm');
 editform.style.display = "none";
 
+
+let lastid =1;
+
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
-    const id = document.getElementById('productId').value;
+    // const id = document.getElementById('productId').value;
     let name = document.getElementById('productName').value;
     let price = document.getElementById('price').value;
     let description = document.getElementById('description').value;
     let img = document.getElementById('productImage').files[0];
 
-    if (id && name && price && description && img) {
+    if (name && price && description && img) {
 
         const reader = new FileReader();
         reader.onload = function () {
             let imgURL = reader.result;
             let products = JSON.parse(localStorage.getItem("products")) || [];
-            let newProduct = { id, name, price, description, img: imgURL };
+            let newProduct = { id : lastid, name, price, description, img: imgURL };
             let exists = products.some(prod => {
-                if (prod.id === newProduct.id) {
-                    return prod.id;
+                if (prod.name === newProduct.name) {
+                    return prod.name;
                 }
             });
             if (!exists) {
                 products.push(newProduct);
+                lastid++;
                 localStorage.setItem("products", JSON.stringify(products));
             } else {
-                alert("product already exists")
+                alert("product with same name already exists")
             }
 
             loadProducts();
@@ -93,8 +97,7 @@ function deleteProduct(indx) {
 function loadProducts() {
 
     const sortfilter = document.getElementById("sortSelect").value;
-    console.log(sortfilter);
-    
+    // console.log(sortfilter);
     let products = JSON.parse(localStorage.getItem("products")) || [];
 
     switch (sortfilter) {
