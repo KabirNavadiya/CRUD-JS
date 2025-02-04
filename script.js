@@ -1,5 +1,7 @@
 const form = document.getElementById('productForm');
 document.addEventListener("DOMContentLoaded", loadProducts);
+const editform = document.getElementById('editForm');
+editform.style.display = "none";
 
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
@@ -41,49 +43,44 @@ form.addEventListener("submit",(e)=>{
 let editIndx = null;
 function editProduct(indx) {
 
+    form.style.display="none";
+    editform.style.display = "flex";
     editIndx = indx;
     let products = JSON.parse(localStorage.getItem("products"));
     let product = products[indx];
 
+    document.getElementById('eproductId').value = product.id;
+    document.getElementById('eproductId').disabled = true;
+    document.getElementById('eproductName').value = product.name;
+    document.getElementById('eprice').value = product.price;
+    document.getElementById('edescription').value = product.description;
+    document.getElementById('eproductImage').files[0] = product.img;
 
-    document.getElementById('productId').value = product.id;
-    document.getElementById('productId').disabled = true;
-    document.getElementById('productName').value = product.name;
-    document.getElementById('price').value = product.price;
-    document.getElementById('description').value = product.description;
-    document.getElementById('productImage').files[0] = product.img;
-    document.getElementById('submitButton').style.display = "none";
+    editform.addEventListener("submit",(e)=>{
 
-    document.getElementById('Update').style.display = "block"
-    // document.addEventListener("submit", handleEdit);
-
+        e.preventDefault();
+        const id = document.getElementById('eproductId').value;
+        let name = document.getElementById('eproductName').value;
+        let price = document.getElementById('eprice').value;
+        let description = document.getElementById('edescription').value;
+        let img = document.getElementById('eproductImage').files[0];
+    
+    
+        const reader = new FileReader();
+        reader.onload = function () {
+            let imgURL = reader.result;
+            let products = JSON.parse(localStorage.getItem("products")) || [];
+            let newProduct = { id, name, price, description, img: imgURL };
+            products[editIndx] = newProduct;
+            localStorage.setItem("products", JSON.stringify(products));
+            loadProducts();
+        }
+        reader.readAsDataURL(img);
+        editform.style.display = "none";
+        form.style.display = "flex";
+    });
 }
 
-function handleEdit(e) {
-
-    e.preventDefault();
-    const id = document.getElementById('productId').value;
-    let name = document.getElementById('productName').value;
-    let price = document.getElementById('price').value;
-    let description = document.getElementById('description').value;
-    let img = document.getElementById('productImage').files[0];
-
-
-    const reader = new FileReader();
-    reader.onload = function () {
-        let imgURL = reader.result;
-        let products = JSON.parse(localStorage.getItem("products")) || [];
-        let newProduct = { id, name, price, description, img: imgURL };
-        // products.push(newProduct);
-        products[editIndx] = newProduct;
-        localStorage.setItem("products", JSON.stringify(products));
-        loadProducts();
-    }
-    reader.readAsDataURL(img);
-
-    document.getElementById('Update').style.display = "none";
-    document.getElementById('submitButton').style.display = "block";
-}
 
 function deleteProduct(indx) {
     let products = JSON.parse(localStorage.getItem("products"));
@@ -115,8 +112,8 @@ function loadProducts() {
     }
     let table = document.getElementById('productTable');
     table.innerHTML = "";
+    
     products.forEach((product, indx) => {
-
         let row = table.insertRow();
         row.innerHTML = `
             <td>${product.id}</td>
