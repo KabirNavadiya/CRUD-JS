@@ -6,34 +6,37 @@
     <title>Product Management</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body> 
     <h1>Product Management System</h1>
-    <form id="productForm" class="productForm" action="#">
-        <input type="text" id="productName" placeholder="Product Name" >
-        <input type="number" id="price" placeholder="Price" >
-        <input type="text" id="description" placeholder="Description" >
-        <input type="file" id="productImage" accept="image/*">
-        <button class="Add-product" id="submitButton" type="submit" value="submit-btn">Add Product</button>
-    </form>
-    <form id="editForm" class="editForm" action="#">
-        <input type="text" id="eproductId" placeholder="Product Id" disabled >
-        <input type="text" id="eproductName" placeholder="Product Name" >
-        <input type="text" id="eprice" placeholder="Price" >
-        <input type="text" id="edescription" placeholder="Description" >
-        <input type="file" id="eproductImage" accept="image/*">
-        <button class="edit-product" id="Update" type="submit" value="edit-btn">Update</button>
-    </form>
-    <br>
-    <form id="filter" action="#">
-        <label>search:</label>
-        <input type="text" id="filterInput" placeholder="Search product name" oninput="handleSearch()">
-        <label>Sort by:</label>
-        <select id="sortSelect">
-            <option value="name">Product Name</option>
-            <option value="price" selected>Price</option>
-        </select>
-        <button class="apply-filter" id="sortItem" type="submit">Apply</button>
-    </form>
+    <div class="container">
+        <form id="productForm" class="productForm" action="#">
+            <input type="text" class="input-field" id="productName" placeholder="Product Name" >
+            <input type="number" class="input-field" id="price" placeholder="Price" >
+            <input type="text" class="input-field" id="description" placeholder="Description" >
+            <input type="file" id="productImage" accept="image/*">
+            <button class="Add-product" id="submitButton" type="submit" value="submit-btn">Add Product</button>
+        </form>
+        <form id="editForm" class="editForm" action="#">
+            <input type="text" class="input-field" id="eproductId" placeholder="Product Id" disabled >
+            <input type="text" class="input-field" id="eproductName" placeholder="Product Name" >
+            <input type="number" class="input-field" id="eprice" placeholder="Price" >
+            <input type="text" class="input-field" id="edescription" placeholder="Description" >
+            <input type="file" id="eproductImage" accept="image/*">
+            <button class="edit-product" id="Update" type="submit" value="edit-btn">Update</button>
+        </form>
+        <br>
+        <form id="filter" action="#">
+            <label>search:</label>
+            <input type="text" id="filterInput" class="filter input-field" placeholder="Search product name" oninput="handleSearch()">
+            <label>Sort by:</label>
+            <select id="sortSelect" class="filter input-field">
+                <option value="name">Product Name</option>
+                <option value="price" selected>Price</option>
+            </select>
+            <button class="apply-filter" id="sortItem" type="submit">Apply</button>
+        </form>
+    </div>
+   
 
     <h1>Product List</h1>
     <table>

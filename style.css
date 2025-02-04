@@ -2,13 +2,17 @@ body {
     text-align: center;
     font-family: Arial, sans-serif;
 }
-.productForm{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+
+.container{
+    border: 1px solid black;
+    width: max-content;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.404);
+
+
 }
-.editForm{
+.editForm,.productForm{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,8 +20,14 @@ body {
 }
 
 
-input, button, select {
+.input-field, button, select {
     padding: 8px;
+    width: 80%;
+    border-radius: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.418);
+    padding: 10px;
+}
+.filter{
     width: 200px;
 }
 
@@ -50,7 +60,20 @@ button{
     width: 60px;
 }
 .Add-product{
-    width: 200px;
+    width: 80%;
+    color: white;
+    background-color: #0059ff91;
+}
+.Add-product:hover{
+    background-color: #0059ffd2;
+}
+.edit-product{
+    width: 80%;
+    color: white;
+    background-color: #2eaa53cb;
+}
+.edit-product:hover{
+    background-color: #1c6933cb;
 }
 .edit{
     margin-right: 10px;

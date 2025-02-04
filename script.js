@@ -16,13 +16,12 @@ form.addEventListener("submit",(e)=>{
     let price = document.getElementById('price').value;
     let description = document.getElementById('description').value;
     let img = document.getElementById('productImage').files[0];
-    let imgsize = document.getElementById('productImage').files[0].size;
 
     if (name && price && description && img) {
         const reader = new FileReader();
         reader.onload = function () {
 
-            if(imgsize<500000){
+            if(img.size<500000){
                 let imgURL = reader.result;
                 products = JSON.parse(localStorage.getItem("products")) || [];
                 let newProduct = { id : generateId(), name, price, description, img: imgURL };
