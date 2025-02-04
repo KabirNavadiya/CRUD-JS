@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h2>Product Management System</h2>
+    
+    <form id="productForm" >
+        <input type="text" id="productId" placeholder="Product Id" >
+        <input type="text" id="productName" placeholder="Product Name" >
+        <input type="text" id="price" placeholder="Price" >
+        <input type="text" id="description" placeholder="Description" >
+        <input type="file" id="productImage" accept="image/*">
+        <button class="Add-product" id="submitButton" type="submit">Add Product</button>
+        <button class="edit-product" id="Update" type="submit">Update</button>
+    </form>
+
+
+    <br>
+    
+    <label>search:</label>
+    <input type="text" id="filterInput" placeholder="Search product name" oninput="handleSearch()">
+    <label>Sort by:</label>
+    <select id="sortSelect">
+        <option value="id">Product ID</option>
+        <option value="name">Product Name</option>
+        <option value="price">Price</option>
+    </select>
+
+    <h3>Product List</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="productTable"></tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
