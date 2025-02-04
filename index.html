@@ -7,18 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <h2>Product Management System</h2>
-    
-    <form id="productForm" class="productForm" >
-        <!-- <input type="text" id="productId" placeholder="Product Id" > -->
+    <form id="productForm" class="productForm" action="#">
         <input type="text" id="productName" placeholder="Product Name" >
         <input type="text" id="price" placeholder="Price" >
         <input type="text" id="description" placeholder="Description" >
         <input type="file" id="productImage" accept="image/*">
         <button class="Add-product" id="submitButton" type="submit" value="submit-btn">Add Product</button>
     </form>
-    <form id="editForm" class="editForm" >
+    <form id="editForm" class="editForm" action="#">
         <input type="text" id="eproductId" placeholder="Product Id" disabled >
         <input type="text" id="eproductName" placeholder="Product Name" >
         <input type="text" id="eprice" placeholder="Price" >
@@ -26,22 +23,17 @@
         <input type="file" id="eproductImage" accept="image/*">
         <button class="edit-product" id="Update" type="submit" value="edit-btn">Update</button>
     </form>
-
-
     <br>
-    <form id="filter">
+    <form id="filter" action="#">
         <label>search:</label>
         <input type="text" id="filterInput" placeholder="Search product name" oninput="handleSearch()">
         <label>Sort by:</label>
         <select id="sortSelect">
-            <option value="id">Product ID</option>
             <option value="name">Product Name</option>
-            <option value="price">Price</option>
+            <option value="price" selected>Price</option>
         </select>
         <button class="apply-filter" id="sortItem" type="submit">Apply</button>
     </form>
-    
-    
 
     <h3>Product List</h3>
     <table>

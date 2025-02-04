@@ -12,14 +12,12 @@ function generateId(){
 
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
-    // const id = document.getElementById('productId').value;
     let name = document.getElementById('productName').value;
     let price = document.getElementById('price').value;
     let description = document.getElementById('description').value;
     let img = document.getElementById('productImage').files[0];
 
     if (name && price && description && img) {
-
         const reader = new FileReader();
         reader.onload = function () {
             let imgURL = reader.result;
@@ -32,16 +30,13 @@ form.addEventListener("submit",(e)=>{
             });
             if (!exists) {
                 products.push(newProduct);
-                // lastid++;
                 localStorage.setItem("products", JSON.stringify(products));
             } else {
                 alert("product with same name already exists")
             }
-
             loadProducts();
         }
         reader.readAsDataURL(img);
-
     }
     else {
         alert('Please Enter Details !')
@@ -65,15 +60,13 @@ function editProduct(indx) {
     document.getElementById('eproductImage').files[0] = product.img;
 
     editform.addEventListener("submit",(e)=>{
-
-        e.preventDefault();
+        // e.preventDefault();
         const id = document.getElementById('eproductId').value;
         let name = document.getElementById('eproductName').value;
         let price = document.getElementById('eprice').value;
         let description = document.getElementById('edescription').value;
         let img = document.getElementById('eproductImage').files[0];
-    
-    
+
         const reader = new FileReader();
         reader.onload = function () {
             let imgURL = reader.result;
@@ -89,7 +82,6 @@ function editProduct(indx) {
     });
 }
 
-
 function deleteProduct(indx) {
     products = JSON.parse(localStorage.getItem("products"));
     products.splice(indx, 1);
@@ -100,12 +92,7 @@ function deleteProduct(indx) {
 applyfilter.addEventListener("submit",(e)=>{
     e.preventDefault();
     const sortfilter = document.getElementById("sortSelect").value;
-    console.log(sortfilter);
-    
     switch (sortfilter) {
-        case "id":
-            products = products.sort((a,b)=> a.id - b.id);
-            break;
         case "price":
             products = products.sort((a,b)=> a.price - b.price);
             break;
@@ -115,41 +102,77 @@ applyfilter.addEventListener("submit",(e)=>{
         default:
             break;
     }
-    displayProduct(products)
+    displayProduct(products);
     console.log(products);    
 })
 
-function loadProducts() {
-    let products = JSON.parse(localStorage.getItem("products")) || [];
-    displayProduct(products);
+function createCell(value){
+    var cell =document.createElement('td');
+    cell.innerText = value;
+    return cell;
+}
+function appendImgCell(value){
+    var cell = document.createElement('td');
+    var img = document.createElement('img');
+    img.src=value;
+    img.alt="product-img";
+    cell.appendChild(img)
+    return cell
+}
+function appendbuttoncell(index){
+    var cell = document.createElement('td');
+    var btn1 = document.createElement('button');
+    var btn2 = document.createElement('button');
+    btn1.onclick = function(){editProduct(index)};
+    btn2.onclick = function(){deleteProduct(index)};
+    btn1.innerText= "Edit";
+    btn2.innerText = "Delete";
+    cell.appendChild(btn1);
+    cell.appendChild(btn2);
+    return cell;
 }
 function displayProduct(products){
     let table = document.getElementById('productTable');
     table.innerHTML = "";
-    
-    products.forEach((product, indx) => {
-        let row = table.insertRow();
-        row.innerHTML = `
-            <td>${product.id}</td>
-            <td>${product.name}</td>
-            <td>$${product.price}</td>
-            <td>${product.description}</td>
-            <td><img src="${product.img}" alt="product-img"></td>
-            <td>
-                <button onClick="editProduct(${indx})">Edit</button>
-                <button onClick="deleteProduct(${indx})">Delete</button>
-            </td>
-        `
+
+    products.forEach((product,index) => {
+        let row = document.createElement('tr');
+
+        row.appendChild(createCell(product.id));
+        row.appendChild(createCell(product.name));
+        row.appendChild(createCell(product.price));
+        row.appendChild(createCell(product.description));
+        row.appendChild(appendImgCell(product.img));
+        row.appendChild(appendbuttoncell(index))
+
+        table.appendChild(row)
+
     });
+    
+    // products.forEach((product, indx) => {
+    //     let row = table.insertRow();
+    //     row.innerHTML = `
+    //         <td>${product.id}</td>
+    //         <td>${product.name}</td>
+    //         <td>$${product.price}</td>
+    //         <td>${product.description}</td>
+    //         <td><img src="${product.img}" alt="product-img"></td>
+    //         <td>
+    //             <button onClick="editProduct(${indx})">Edit</button>
+    //             <button onClick="deleteProduct(${indx})">Delete</button>
+    //         </td>
+    //     `
+    // });
 }
-
-
+function loadProducts() {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    displayProduct(products);
+}
 
 function handleSearch() {
     const input = document.getElementById('filterInput').value;
     let table = document.getElementById("productTable")
     let tr = table.getElementsByTagName('tr');
-
     for (let i = 0; i < tr.length; i++) {
         let td = tr[i].getElementsByTagName("td")[1];
         if (td) {
