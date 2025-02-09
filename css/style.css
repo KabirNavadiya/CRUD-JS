@@ -79,6 +79,14 @@ button{
 .edit-product:hover{
     background-color: #1c6933cb;
 }
+.cancel-edit{
+    width: 80%;
+    color: white;
+    background-color: rgb(224, 43, 43);
+}
+.cancel-edit:hover{
+    background-color: rgb(179, 31, 31);
+}
 .edit{
     margin-right: 10px;
     padding: 10px;
