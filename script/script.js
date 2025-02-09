@@ -53,7 +53,6 @@ form.addEventListener("submit", (e) => {
         alert('Please Enter Details !')
     }
 });
-
 let cancel = document.getElementById("cancel");
 cancel.addEventListener("click",(e)=>{
     e.preventDefault()
@@ -96,6 +95,7 @@ function editProduct(indx) {
                 loadProducts();
             }
             reader.readAsDataURL(img);
+
         } else {
             let newProduct = { id, name, price, category, description, img: products[editIndx].img };
             products[editIndx] = newProduct;
@@ -207,3 +207,4 @@ function handleSearch() {
         tr[i].style.display = flag ? "" : "none";
     }
 }
+
