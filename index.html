@@ -1,52 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Management</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body> 
+
+<body>
     <h1>Product Management System</h1>
     <div class="container">
         <form id="productForm" class="productForm" action="#">
-            <input type="text" class="input-field" id="productName" placeholder="Product Name" >
-             <select id="productCategory">
+            <input type="text" class="input-field" id="productName" placeholder="Product Name">
+            <select id="productCategory">
                 <option value="electronics">Electronics</option>
                 <option value="fashion">Fashion</option>
                 <option value="furniture">Furniture</option>
-             </select>
-            <input type="number" class="input-field" id="price" placeholder="Price" >
-            <input type="text" class="input-field" id="description" placeholder="Description" >
+            </select>
+            <input type="number" class="input-field" id="price" placeholder="Price">
+            <input type="text" class="input-field" id="description" placeholder="Description">
             <input type="file" id="productImage" accept="image/*">
             <button class="Add-product" id="submitButton" type="submit" value="submit-btn">Add Product</button>
         </form>
         <form id="editForm" class="editForm" action="#">
-            <input type="text" class="input-field" id="eproductId" placeholder="Product Id" disabled >
-            <input type="text" class="input-field" id="eproductName" placeholder="Product Name" >
+            <input type="text" class="input-field" id="eproductId" placeholder="Product Id" disabled>
+            <input type="text" class="input-field" id="eproductName" placeholder="Product Name">
             <select id="eproductCategory">
                 <option value="electronics">Electronics</option>
                 <option value="fashion">Fashion</option>
                 <option value="furniture">Furniture</option>
-             </select>
-            <input type="number" class="input-field" id="eprice" placeholder="Price" >
-            <input type="text" class="input-field" id="edescription" placeholder="Description" >
+            </select>
+            <input type="number" class="input-field" id="eprice" placeholder="Price">
+            <input type="text" class="input-field" id="edescription" placeholder="Description">
             <input type="file" id="eproductImage" accept="image/*">
             <button class="edit-product" id="Update" type="submit" value="edit-btn">Update</button>
         </form>
         <br>
         <form id="filter" action="#">
             <label>search:</label>
-            <input type="text" id="filterInput" class="filter input-field" placeholder="Search" oninput="handleSearch()">
+            <input type="text" id="filterInput" class="filter input-field" placeholder="Search"
+                oninput="handleSearch()">
             <label>Sort by:</label>
             <select id="sortSelect" class="filter input-field">
                 <option value="name">Product Name</option>
                 <option value="price" selected>Price</option>
             </select>
-            <button class="apply-filter" id="sortItem" type="submit">Apply</button>
         </form>
     </div>
-   
+
 
     <h1>Product List</h1>
     <table>
@@ -66,4 +69,5 @@
 
     <script src="script/script.js"></script>
 </body>
+
 </html>
